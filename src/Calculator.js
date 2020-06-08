@@ -20,6 +20,9 @@ class Calculator extends React.Component {
 
   addToLast(e){
     let value = e.target.value;
+
+    if(value === "." && /\./.test(this.numberInput.current.value)) return false;
+
     if(this.lastInput === "."){
       value = this.numberInput.current.value.length === 0 ? ("0."+value) : ("."+value);
     }
