@@ -64,8 +64,13 @@ class Calculator extends React.Component {
         break;
       }
     }
-    this.numberInput.current.value = operador ? "" : this.cuenta;
+    this.numberInput.current.value = operador ? "" : this.cuentaToString();
     this.lastOperator = operador;
+  }
+
+  cuentaToString(){
+    if(Number.isInteger(this.cuenta)) return this.cuenta.toString();
+    return this.cuenta.toFixed(4);
   }
 
   clearInput(){
