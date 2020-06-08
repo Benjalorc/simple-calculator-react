@@ -21,7 +21,10 @@ class Calculator extends React.Component {
   addToLast(e){
     let value = e.target.value;
 
-    if(value === "." && /\./.test(this.numberInput.current.value)) return false;
+    if(value === "."){
+      if(this.numberInput.current.value === ".") value = "";
+      else if(this.lastInput === "." || /\./.test(this.numberInput.current.value)) return false;
+    }
 
     if(this.lastInput === "."){
       value = this.numberInput.current.value.length === 0 ? ("0."+value) : ("."+value);
@@ -29,6 +32,7 @@ class Calculator extends React.Component {
     else if(value === "."){
       value = "";
     }
+
     this.numberInput.current.value += value;
     this.lastInput = e.target.value;
   }
@@ -67,6 +71,7 @@ class Calculator extends React.Component {
   clearInput(){
     this.numberInput.current.value = "";
     this.lastOperator = null;
+    this.lastInput = "";
     this.cuenta = 0;
   }
 
